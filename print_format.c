@@ -6,7 +6,7 @@
 /*   By: nfiora-d <nfiora-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:47:48 by nfiora-d          #+#    #+#             */
-/*   Updated: 2025/10/17 17:19:09 by nfiora-d         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:29:01 by nfiora-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ int	print_format(char specifier, va_list ap)
 {
 	int	count;
 
-	count = 0;	
+	count = 0;
 	if (specifier == 'c')
 		count += print_char(va_arg(ap, int));
 	else if (specifier == 's')
