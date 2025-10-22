@@ -9,26 +9,33 @@
 /*   Updated: 2025/10/17 16:59:49 by nfiora-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FT_PRINTF_H
+#include "ft_printf.h"
 
-# define FT_PRINTF_H
+int	print_hexa(unsigned long long int adresse, char tmp)
+{
+	int	count;
 
-# include <stdarg.h>
-# include <stdio.h>
-# include <unistd.h>
+	count = 0;
+	if (adresse >= 16)
+	{
+		count += print_hexa(adresse / 16, tmp);
+		count += print_hexa(adresse % 16, tmp);
+	}
+	if (adresse < 16 && tmp == 'x')
+		count += print_char(HEX_LOW[adresse]);
+	return (count);
+}
 
-# define HEX_LOW "0123456789abcdef"
-# define HEX_UPP "0123456789ABCDEF"
+int	print_ptr(void *content)
+{
+	int						count;
+	unsigned long long int	adresse;
 
-//foncton standard pour ftprinf
-int	ft_printf(const char *s, ...);
-int	print_char(int c);
-int	ft_print_hex(unsigned int n, char c);
-int	print_format(char specifier, va_list ap);
-int	print_str(char *str);
-int	ft_send(char ap);
-int	print_udigit(unsigned int n);
-int	print_ptr(void *content);
-int	print_digit(int n);
-
-#endif
+	count = 0;
+	if (!content)
+		return (write(1, "(nil)", 5));
+	adresse = (unsigned long long int)content;
+	count += print_str("0x");
+	count += print_hexa(adresse, 'x');
+	return (count);
+}

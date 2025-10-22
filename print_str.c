@@ -9,15 +9,23 @@
 /*   Updated: 2025/10/17 17:08:50 by nfiora-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_printf.h"
 
-int print_str(char *str)
+int	print_str(char *str)
 {
-	int count;
+	int	count;
+	int	i;
 
-	while (*str)
+	i = 0;
+	count = 0;
+	if (!str)
 	{
-		count += print_char((int)*str);
-		str++;
+		return (count += write(1, "(null)", 6));
+	}
+	while (str[i])
+	{
+		count += print_char((int)str[i]);
+		i++;
 	}
 	return (count);
 }
