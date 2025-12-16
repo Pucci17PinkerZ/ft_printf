@@ -26,8 +26,8 @@ int	ft_printf(const char *s, ...)
 	{
 		if (s[i] == '%' && ft_send(s[i + 1]))
 		{
-			if (print_format(s[i + 1], ap) == -1)
-				return (-1);
+			// if (print_format(s[i + 1], ap) == -1)
+			// 	return (-1);
 			final_size += print_format(s[i + 1], ap);
 			i += 2;
 		}

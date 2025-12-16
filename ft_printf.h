@@ -20,7 +20,6 @@
 # define HEX_LOW "0123456789abcdef"
 # define HEX_UPP "0123456789ABCDEF"
 
-//foncton standard pour ftprinf
 int	ft_printf(const char *s, ...);
 int	print_char(int c);
 int	ft_print_hex(unsigned int n, char c);
