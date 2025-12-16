@@ -16,6 +16,7 @@ int	ft_printf(const char *s, ...)
 	int		final_size;
 	va_list	ap;
 	int		i;
+	int		checksize;
 
 	i = 0;
 	if (!s)
@@ -24,11 +25,13 @@ int	ft_printf(const char *s, ...)
 	final_size = 0;
 	while (s[i])
 	{
+		checksize = 0;
 		if (s[i] == '%' && ft_send(s[i + 1]))
 		{
-			// if (print_format(s[i + 1], ap) == -1)
-			// 	return (-1);
-			final_size += print_format(s[i + 1], ap);
+			checksize = print_format(s[i + 1], ap);
+			if (checksize == -1)
+				return (va_end(ap), -1);
+			final_size += checksize;
 			i += 2;
 		}
 		else
@@ -38,4 +41,9 @@ int	ft_printf(const char *s, ...)
 		}
 	}
 	return (va_end(ap), final_size);
+}
+
+int	ft_printf_loop()
+{
+	
 }
