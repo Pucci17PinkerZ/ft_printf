@@ -14,36 +14,43 @@
 int	ft_printf(const char *s, ...)
 {
 	int		final_size;
+	int		check;
 	va_list	ap;
 	int		i;
-	int		checksize;
 
 	i = 0;
+	check = 0;
+	final_size = 0;
 	if (!s)
 		return (-1);
 	va_start(ap, s);
-	final_size = 0;
 	while (s[i])
 	{
-		checksize = 0;
-		if (s[i] == '%' && ft_send(s[i + 1]))
-		{
-			checksize = print_format(s[i + 1], ap);
-			if (checksize == -1)
-				return (va_end(ap), -1);
-			final_size += checksize;
-			i += 2;
-		}
-		else
-		{
-			final_size += write(1, &s[i], 1);
-			i++;
-		}
+		check = ft_printf_check(&i, s, ap);
+		if (check == -1)
+			return (va_end(ap), -1);
+		final_size += check;
 	}
-	return (va_end(ap), final_size);
+	va_end(ap);
+	return (final_size);
 }
 
-int	ft_printf_loop()
+int	ft_printf_check(int *i, const char *s, va_list ap)
 {
-	
+	int	check;
+
+	if (s[*i] == '%' && ft_send(s[*i + 1]))
+	{
+		check = print_format(s[*i + 1], ap);
+		if (check == -1)
+			return (-1);
+		*i += 2;
+		return (check);
+	}
+	else
+	{
+		check = write(1, &s[*i], 1);
+		(*i)++;
+		return (check);
+	}
 }

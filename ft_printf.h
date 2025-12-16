@@ -21,6 +21,7 @@
 # define HEX_UPP "0123456789ABCDEF"
 
 int	ft_printf(const char *s, ...);
+int	ft_printf_check(int *i, const char *s, va_list ap);
 int	print_char(int c);
 int	ft_print_hex(unsigned int n, char c);
 int	print_format(char specifier, va_list ap);
